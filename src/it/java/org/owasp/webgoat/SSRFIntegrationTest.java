@@ -22,5 +22,6 @@ public class SSRFIntegrationTest extends IntegrationTest {
     checkAssignment(url("/WebGoat/SSRF/task2"), params, true);
 
     checkResults("/SSRF/");
+      //testcomment
   }
 }
