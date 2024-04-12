@@ -46,10 +46,10 @@ public class IDORDiffAttributes extends AssignmentEndpoint {
     if (diffAttribs.length < 2) {
       return failed(this).feedback("idor.diff.attributes.missing").build();
     }
-    if (diffAttribs[0].toLowerCase().trim().equals("userid")
-            && diffAttribs[1].toLowerCase().trim().equals("role")
-        || diffAttribs[1].toLowerCase().trim().equals("userid")
-            && diffAttribs[0].toLowerCase().trim().equals("role")) {
+    if ("userid".equals(diffAttribs[0].toLowerCase().trim())
+            && "role".equals(diffAttribs[1].toLowerCase().trim())
+        || "userid".equals(diffAttribs[1].toLowerCase().trim())
+            && "role".equals(diffAttribs[0].toLowerCase().trim())) {
       return success(this).feedback("idor.diff.success").build();
     } else {
       return failed(this).feedback("idor.diff.failure").build();

@@ -40,13 +40,13 @@ public class BypassRestrictionsFieldRestrictions extends AssignmentEndpoint {
       @RequestParam String checkbox,
       @RequestParam String shortInput,
       @RequestParam String readOnlyInput) {
-    if (select.equals("option1") || select.equals("option2")) {
+    if ("option1".equals(select) || "option2".equals(select)) {
       return failed(this).build();
     }
-    if (radio.equals("option1") || radio.equals("option2")) {
+    if ("option1".equals(radio) || "option2".equals(radio)) {
       return failed(this).build();
     }
-    if (checkbox.equals("on") || checkbox.equals("off")) {
+    if ("on".equals(checkbox) || "off".equals(checkbox)) {
       return failed(this).build();
     }
     if (shortInput.length() <= 5) {

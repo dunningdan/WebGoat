@@ -43,11 +43,11 @@ public class MissingFunctionACHiddenMenus extends AssignmentEndpoint {
       produces = {"application/json"})
   @ResponseBody
   public AttackResult completed(String hiddenMenu1, String hiddenMenu2) {
-    if (hiddenMenu1.equals("Users") && hiddenMenu2.equals("Config")) {
+    if ("Users".equals(hiddenMenu1) && "Config".equals(hiddenMenu2)) {
       return success(this).output("").feedback("access-control.hidden-menus.success").build();
     }
 
-    if (hiddenMenu1.equals("Config") && hiddenMenu2.equals("Users")) {
+    if ("Config".equals(hiddenMenu1) && "Users".equals(hiddenMenu2)) {
       return failed(this).output("").feedback("access-control.hidden-menus.close").build();
     }
 

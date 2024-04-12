@@ -51,9 +51,9 @@ public class IDORViewOwnProfileAltUrl extends AssignmentEndpoint {
         String authUserId = (String) userSessionData.getValue("idor-authenticated-user-id");
         // don't care about http://localhost:8080 ... just want WebGoat/
         String[] urlParts = url.split("/");
-        if (urlParts[0].equals("WebGoat")
-            && urlParts[1].equals("IDOR")
-            && urlParts[2].equals("profile")
+        if ("WebGoat".equals(urlParts[0])
+            && "IDOR".equals(urlParts[1])
+            && "profile".equals(urlParts[2])
             && urlParts[3].equals(authUserId)) {
           UserProfile userProfile = new UserProfile(authUserId);
           return success(this)

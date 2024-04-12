@@ -67,7 +67,7 @@ public class SqlInjectionLesson2 extends AssignmentEndpoint {
 
       results.first();
 
-      if (results.getString("department").equals("Marketing")) {
+      if ("Marketing".equals(results.getString("department"))) {
         output.append("<span class='feedback-positive'>" + query + "</span>");
         output.append(SqlInjectionLesson8.generateTable(results));
         return success(this).feedback("sql-injection.2.success").output(output.toString()).build();

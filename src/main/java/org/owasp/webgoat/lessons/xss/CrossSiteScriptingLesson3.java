@@ -70,10 +70,10 @@ public class CrossSiteScriptingLesson3 extends AssignmentEndpoint {
           && include.contains("%>")) {
         includeCorrect = true;
       }
-      if (fistNameElement.equals("${e:forHtml(param.first_name)}")) {
+      if ("${e:forHtml(param.first_name)}".equals(fistNameElement)) {
         firstNameCorrect = true;
       }
-      if (lastNameElement.equals("${e:forHtml(param.last_name)}")) {
+      if ("${e:forHtml(param.last_name)}".equals(lastNameElement)) {
         lastNameCorrect = true;
       }
 

@@ -111,7 +111,7 @@ public class SpoofCookieAssignment extends AssignmentEndpoint {
       return failed(this).output(e.getMessage()).build();
     }
     if (users.containsKey(cookieUsername)) {
-      if (cookieUsername.equals(ATTACK_USERNAME)) {
+      if (ATTACK_USERNAME.equals(cookieUsername)) {
         return success(this).build();
       }
       return failed(this)

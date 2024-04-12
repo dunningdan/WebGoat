@@ -66,7 +66,7 @@ public class IDORViewOtherProfile extends AssignmentEndpoint {
         UserProfile requestedProfile = new UserProfile(userId);
         // secure code would ensure there was a horizontal access control check prior to dishing up
         // the requested profile
-        if (requestedProfile.getUserId().equals("2342388")) {
+        if ("2342388".equals(requestedProfile.getUserId())) {
           return success(this)
               .feedback("idor.view.profile.success")
               .output(requestedProfile.profileToMap().toString())

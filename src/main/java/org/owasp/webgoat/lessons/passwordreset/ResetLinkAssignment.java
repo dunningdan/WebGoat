@@ -85,7 +85,7 @@ public class ResetLinkAssignment extends AssignmentEndpoint {
     if (TOM_EMAIL.equals(email)) {
       String passwordTom =
           usersToTomPassword.getOrDefault(getWebSession().getUserName(), PASSWORD_TOM_9);
-      if (passwordTom.equals(PASSWORD_TOM_9)) {
+      if (PASSWORD_TOM_9.equals(passwordTom)) {
         return failed(this).feedback("login_failed").build();
       } else if (passwordTom.equals(password)) {
         return success(this).build();

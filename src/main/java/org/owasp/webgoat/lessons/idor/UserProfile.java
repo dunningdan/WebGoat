@@ -43,14 +43,14 @@ public class UserProfile {
   //
   private void setProfileFromId(String id) {
     // emulate look up from database
-    if (id.equals("2342384")) {
+    if ("2342384".equals(id)) {
       this.userId = id;
       this.color = "yellow";
       this.name = "Tom Cat";
       this.size = "small";
       this.isAdmin = false;
       this.role = 3;
-    } else if (id.equals("2342388")) {
+    } else if ("2342388".equals(id)) {
       this.userId = id;
       this.color = "brown";
       this.name = "Buffalo Bill";

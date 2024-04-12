@@ -123,7 +123,7 @@ public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
 
   private String computeResourceName(String resourceName, String language) {
     String computedResourceName;
-    if (language.equals("en")) {
+    if ("en".equals(language)) {
       computedResourceName = resourceName;
     } else {
       computedResourceName = resourceName.replace(".adoc", "_".concat(language).concat(".adoc"));

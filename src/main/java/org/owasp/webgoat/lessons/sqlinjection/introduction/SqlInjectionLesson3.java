@@ -66,7 +66,7 @@ public class SqlInjectionLesson3 extends AssignmentEndpoint {
         StringBuilder output = new StringBuilder();
         // user completes lesson if the department of Tobi Barnett now is 'Sales'
         results.first();
-        if (results.getString("department").equals("Sales")) {
+        if ("Sales".equals(results.getString("department"))) {
           output.append("<span class='feedback-positive'>" + query + "</span>");
           output.append(SqlInjectionLesson8.generateTable(results));
           return success(this).output(output.toString()).build();

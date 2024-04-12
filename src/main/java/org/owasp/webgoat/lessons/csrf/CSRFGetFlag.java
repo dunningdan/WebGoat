@@ -54,7 +54,7 @@ public class CSRFGetFlag {
     String referer = (req.getHeader("referer") == null) ? "NULL" : req.getHeader("referer");
     String[] refererArr = referer.split("/");
 
-    if (referer.equals("NULL")) {
+    if ("NULL".equals(referer)) {
       if ("true".equals(req.getParameter("csrf"))) {
         Random random = new Random();
         userSessionData.setValue("csrf-get-success", random.nextInt(65536));

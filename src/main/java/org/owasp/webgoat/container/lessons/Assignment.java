@@ -58,7 +58,7 @@ public class Assignment {
   }
 
   public Assignment(String name, String path, List<String> hints) {
-    if (path.equals("") || path.equals("/") || path.equals("/WebGoat/")) {
+    if ("".equals(path) || "/".equals(path) || "/WebGoat/".equals(path)) {
       throw new IllegalStateException(
           "The path of assignment '"
               + name
