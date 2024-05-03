@@ -1,5 +1,6 @@
 package org.dummy.insecure.framework;
 
+import io.github.pixee.security.BoundedLineReader;
 import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class VulnerableTaskHolder implements Serializable {
         Process p = SystemCommand.runCommand(Runtime.getRuntime(), taskAction);
         BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
         String line = null;
-        while ((line = in.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
           log.info(line);
         }
       } catch (IOException e) {
