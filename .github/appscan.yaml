@@ -1,7 +1,7 @@
-name: "HCL AppScan SAST"
+name: Repository Dispatch
 on:
-  workflow_dispatch:
-  
+  repository_dispatch:
+    types: [my-event]
 jobs:
   scan:
     runs-on: ubuntu-latest
