@@ -168,8 +168,7 @@ public class LabelAndHintIntegrationTest extends IntegrationTest {
       // load a properties file
       prop.load(input);
     } catch (Exception e) {
-      e.printStackTrace();
-    }
+}
     return prop;
   }
 
