@@ -127,8 +127,7 @@ public class SqlInjectionLesson10b extends AssignmentEndpoint {
     try {
       javaFileObject = new JavaObjectFromString("TestClass.java", javaFileContents.toString());
     } catch (Exception exception) {
-      exception.printStackTrace();
-    }
+}
     return javaFileObject;
   }
 

@@ -59,7 +59,6 @@ public class SSRFTask1 extends AssignmentEndpoint {
         return failed(this).feedback("ssrf.failure").output(html.toString()).build();
       }
     } catch (Exception e) {
-      e.printStackTrace();
       return failed(this).output(e.getMessage()).build();
     }
   }
