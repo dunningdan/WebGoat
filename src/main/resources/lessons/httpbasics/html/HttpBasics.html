@@ -21,12 +21,12 @@
             <!-- of course, you can write your own ajax submission /handling in your own javascript if you like -->
 			<form class="attack-form" accept-charset="UNKNOWN"
 				method="POST" name="form"
-				action="HttpBasics/attack1">
+				th:action="@{/HttpBasics/attack1}">
 				<div id="lessonContent">
 					<form accept-charset="UNKNOWN" method="POST" name="form"
-						action="#attack/307/100">
-						Enter Your Name: <input name="person" value="" type="TEXT"/><input
-							name="SUBMIT" value="Go!" type="SUBMIT"/>
+						th:action="@{/#attack/307/100}">
+						Enter your name: <input name="person" value="" type="TEXT"/><input
+							name="SUBMIT" value="Go!" type="SUBMIT" class="spacing"/>
 					</form>
 				</div>
 			</form>
@@ -51,7 +51,7 @@
                 <!-- of course, you can write your own ajax submission /handling in your own javascript if you like -->
 				<form class="attack-form" accept-charset="UNKNOWN"
 					method="POST" name="form"
-					action="HttpBasics/attack2">
+					th:action="@{/HttpBasics/attack2}">
 					<script>
 					    // sample custom javascript in the recommended way ...
 					    // a namespace has been assigned for it, but you can roll your own if you prefer
@@ -71,7 +71,7 @@
 						<tr>
 							<td>What is the magic number:</td>
 							<td><input name="magic_answer" value="" type="TEXT" /><input
-								name="SUBMIT" value="Go!" type="SUBMIT" /></td>
+								name="SUBMIT" value="Go!" type="SUBMIT" class="spacing" /></td>
 							<td></td>
 						</tr>
 					</table>
