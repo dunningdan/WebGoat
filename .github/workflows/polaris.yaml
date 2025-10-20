@@ -57,12 +57,12 @@ jobs:
         # detect_search_depth: 2
         # detect_args: '--detect.diagnostic=true'
         # detect_config_path: '/Users/Config/application.properties'
-        # coverity_build_command: mvn clean install
-        # coverity_clean_command: mvn clean
+        coverity_build_command: mvn -B clean install -DskipTests
+        coverity_clean_command: mvn -B clean
         # coverity_config_path: /Users/Config/coverity.yml
         # coverity_args: --config-override capture.build.build-command=mvn install
 
-        
+
     - name: Polaris PR Scan
       id: polaris-pr-scan
       if: ${{ github.event_name == 'pull_request' }}
@@ -85,6 +85,10 @@ jobs:
         #### Uncomment this to use Local Analysis feature
         # Please use Local Analysis or Source Upload exclusively
         # polaris_test_sast_location: 'local'
+
+        ### Build commands for SAST analysis
+        coverity_build_command: mvn -B clean install -DskipTests
+        coverity_clean_command: mvn -B clean
 
         ### Below configuration is used to enable feedback from Polaris security testing as pull request comment
         polaris_prComment_enabled: true
