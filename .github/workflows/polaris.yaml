@@ -28,12 +28,12 @@ jobs:
         # include_diagnostics: true
 
         ### SARIF report generation and upload to GitHub Adavanced Security Tab: Uncomment below to enable
-        # polaris_reports_sarif_create: true  
+        # polaris_reports_sarif_create: true
         # polaris_reports_sarif_file_path: '/Users/tmp/report.sarif.json' # File path (including file name) where SARIF report is created.
         # polaris_reports_sarif_severities: "CRITICAL,HIGH"
-        # polaris_reports_sarif_groupSCAIssues: true 
-        # polaris_reports_sarif_issue_types: 'SCA, SAST' 
-        # polaris_upload_sarif_report: true 
+        # polaris_reports_sarif_groupSCAIssues: true
+        # polaris_reports_sarif_issue_types: 'SCA, SAST'
+        # polaris_upload_sarif_report: true
         # github_token: ${{ secrets.GITHUB_TOKEN }} # Required when polaris_upload_sarif_report is set as true
 
         ### Mark build status if policy violating issues are found
@@ -48,7 +48,7 @@ jobs:
         # project_source_archive: ${{ vars.PROJECT_SOURCE_ARCHIVE }}
         # project_source_excludes: ${{ vars.PROJECT_SOURCE_EXCLUDES }} # Accepts Multiple Values
         # project_source_preserveSymLinks: true
-                      
+
         #### Uncomment this to use Local Analysis feature
         # Please use Local Analysis or Source Upload exclusively
         # polaris_test_sast_location: 'local'
@@ -81,7 +81,7 @@ jobs:
         # project_source_archive: ${{ vars.PROJECT_SOURCE_ARCHIVE }}
         # project_source_excludes: ${{ vars.PROJECT_SOURCE_EXCLUDES }} # Accepts Multiple Values
         # project_source_preserveSymLinks: true
-                      
+
         #### Uncomment this to use Local Analysis feature
         # Please use Local Analysis or Source Upload exclusively
         # polaris_test_sast_location: 'local'

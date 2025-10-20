@@ -3,7 +3,7 @@ on:
   repository_dispatch:
     types: [my-event]
   workflow_dispatch:
-  
+
 jobs:
   scan:
     runs-on: ubuntu-latest
