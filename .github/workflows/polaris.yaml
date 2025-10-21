@@ -11,6 +11,10 @@ jobs:
     steps:
     - name: Checkout Source
       uses: actions/checkout@v4
+    - name: Set up JDK
+      uses: ./.github/actions/java-setup
+      with:
+        cache: 'maven'
     - name: Polaris Full Scan
       id: polaris-full-scan
       if: ${{ github.event_name != 'pull_request' }}
@@ -25,15 +29,15 @@ jobs:
         # project_directory: ${{ vars.PROJECT_DIRECTORY }}
 
         ### Uncomment below configuration if Bridge diagnostic files needs to be uploaded
-        # include_diagnostics: true
+        include_diagnostics: true
 
         ### SARIF report generation and upload to GitHub Adavanced Security Tab: Uncomment below to enable
-        # polaris_reports_sarif_create: true  
+        # polaris_reports_sarif_create: true
         # polaris_reports_sarif_file_path: '/Users/tmp/report.sarif.json' # File path (including file name) where SARIF report is created.
         # polaris_reports_sarif_severities: "CRITICAL,HIGH"
-        # polaris_reports_sarif_groupSCAIssues: true 
-        # polaris_reports_sarif_issue_types: 'SCA, SAST' 
-        # polaris_upload_sarif_report: true 
+        # polaris_reports_sarif_groupSCAIssues: true
+        # polaris_reports_sarif_issue_types: 'SCA, SAST'
+        # polaris_upload_sarif_report: true
         # github_token: ${{ secrets.GITHUB_TOKEN }} # Required when polaris_upload_sarif_report is set as true
 
         ### Mark build status if policy violating issues are found
@@ -48,7 +52,7 @@ jobs:
         # project_source_archive: ${{ vars.PROJECT_SOURCE_ARCHIVE }}
         # project_source_excludes: ${{ vars.PROJECT_SOURCE_EXCLUDES }} # Accepts Multiple Values
         # project_source_preserveSymLinks: true
-                      
+
         #### Uncomment this to use Local Analysis feature
         # Please use Local Analysis or Source Upload exclusively
         # polaris_test_sast_location: 'local'
@@ -57,12 +61,12 @@ jobs:
         # detect_search_depth: 2
         # detect_args: '--detect.diagnostic=true'
         # detect_config_path: '/Users/Config/application.properties'
-        # coverity_build_command: mvn clean install
-        # coverity_clean_command: mvn clean
+        coverity_build_command: mvn -B clean install -DskipTests
+        coverity_clean_command: mvn -B clean
         # coverity_config_path: /Users/Config/coverity.yml
         # coverity_args: --config-override capture.build.build-command=mvn install
 
-        
+
     - name: Polaris PR Scan
       id: polaris-pr-scan
       if: ${{ github.event_name == 'pull_request' }}
@@ -81,10 +85,14 @@ jobs:
         # project_source_archive: ${{ vars.PROJECT_SOURCE_ARCHIVE }}
         # project_source_excludes: ${{ vars.PROJECT_SOURCE_EXCLUDES }} # Accepts Multiple Values
         # project_source_preserveSymLinks: true
-                      
+
         #### Uncomment this to use Local Analysis feature
         # Please use Local Analysis or Source Upload exclusively
         # polaris_test_sast_location: 'local'
+
+        ### Build commands for SAST analysis
+        coverity_build_command: mvn -B clean install -DskipTests
+        coverity_clean_command: mvn -B clean
 
         ### Below configuration is used to enable feedback from Polaris security testing as pull request comment
         polaris_prComment_enabled: true
@@ -95,7 +103,7 @@ jobs:
         # mark_build_status: 'success'
 
         ### Uncomment below configuration if Bridge diagnostic files needs to be uploaded
-        # include_diagnostics: true
+        include_diagnostics: true
 
         ### Uncomment below configuration to add custom logic based on return status
         # - name: cmdLine
