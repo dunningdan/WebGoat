@@ -11,6 +11,10 @@ jobs:
     steps:
     - name: Checkout Source
       uses: actions/checkout@v4
+    - name: Set up JDK
+      uses: ./.github/actions/java-setup
+      with:
+        cache: 'maven'
     - name: Polaris Full Scan
       id: polaris-full-scan
       if: ${{ github.event_name != 'pull_request' }}
@@ -25,7 +29,7 @@ jobs:
         # project_directory: ${{ vars.PROJECT_DIRECTORY }}
 
         ### Uncomment below configuration if Bridge diagnostic files needs to be uploaded
-        # include_diagnostics: true
+        include_diagnostics: true
 
         ### SARIF report generation and upload to GitHub Adavanced Security Tab: Uncomment below to enable
         # polaris_reports_sarif_create: true
@@ -99,7 +103,7 @@ jobs:
         # mark_build_status: 'success'
 
         ### Uncomment below configuration if Bridge diagnostic files needs to be uploaded
-        # include_diagnostics: true
+        include_diagnostics: true
 
         ### Uncomment below configuration to add custom logic based on return status
         # - name: cmdLine
