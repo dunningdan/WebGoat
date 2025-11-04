@@ -267,6 +267,12 @@ define(['module'], function (module) {
             text.createXhr())) {
         text.get = function (url, callback, errback, headers) {
             var xhr = text.createXhr(), header;
+            if (!xhr) {
+                if (errback) {
+                    errback(new Error('XHR object creation failed.'));
+                }
+                return;
+            }
             xhr.open('GET', url, true);
 
             //Allow plugins direct access to xhr headers
