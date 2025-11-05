@@ -68,7 +68,8 @@ public class JWTRefreshEndpoint implements AssignmentEndpoint {
     Map<String, Object> claims = Map.of("admin", "false", "user", user);
     String token =
         Jwts.builder()
-            .setIssuedAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toDays(10)))
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(10)))
             .setClaims(claims)
             .signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, JWT_PASSWORD)
             .compact();
