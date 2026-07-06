@@ -111,3 +111,57 @@ jobs:
         #   run: |
         #     EXIT_CODE=${{ steps.polaris-full-scan.outputs.status }}
         #     echo "Polarity Full Scan exit status - $EXIT_CODE"
+
+    # ---- Push Polaris findings (SAST + SCA) and an SBOM to Pixee ----
+    - name: Checkout Pixee Polaris script
+      uses: actions/checkout@v4
+      with:
+        repository: pixee/blackduck-polaris-scripts
+        ref: feature/polaris-sca-and-sbom-upload   # switch to main after merge
+        path: pixee-polaris
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install Pixee Polaris script
+      run: pip install -e ./pixee-polaris
+
+    - name: Compute Pixee branch + sha
+      id: scm
+      run: |
+        echo "branch=${{ github.head_ref || github.ref_name }}" >> "$GITHUB_OUTPUT"
+        echo "sha=${{ github.event.pull_request.head.sha || github.sha }}" >> "$GITHUB_OUTPUT"
+
+    - name: Push Polaris findings (SAST + SCA) to Pixee
+      run: |
+        python pixee-polaris/polaris_to_sarif.py \
+          --project-id   "${{ vars.POLARIS_PROJECT_ID }}" \
+          --portfolio-id "${{ vars.POLARIS_PORTFOLIO_ID }}" \
+          --polaris-api-token "${{ secrets.POLARIS_ACCESS_TOKEN }}" \
+          --base-url "${{ vars.POLARIS_SERVER_URL }}" \
+          --polaris-branch-name "${{ steps.scm.outputs.branch }}" \
+          --pixee-api-key "${{ secrets.PIXEE_API_KEY }}" \
+          --pixee-repository-id "${{ vars.PIXEE_REPOSITORY_ID }}" \
+          --pixee-base-url "${{ vars.PIXEE_BASE_URL }}" \
+          --pixee-branch-name "${{ steps.scm.outputs.branch }}" \
+          --trigger-analysis
+
+    - name: Generate CycloneDX SBOM (Syft)
+      uses: anchore/sbom-action@v0
+      with:
+        path: .
+        format: cyclonedx-json
+        output-file: bom.json
+
+    - name: Push SBOM to Pixee
+      run: |
+        python pixee-polaris/polaris_to_sarif.py \
+          --upload-sbom-file bom.json \
+          --sbom-tool polaris_sca \
+          --pixee-api-key "${{ secrets.PIXEE_API_KEY }}" \
+          --pixee-repository-id "${{ vars.PIXEE_REPOSITORY_ID }}" \
+          --pixee-base-url "${{ vars.PIXEE_BASE_URL }}" \
+          --pixee-branch-name "${{ steps.scm.outputs.branch }}" \
+          --pixee-commit-sha "${{ steps.scm.outputs.sha }}"
