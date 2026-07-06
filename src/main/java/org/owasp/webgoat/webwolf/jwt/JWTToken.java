@@ -182,8 +182,8 @@ public class JWTToken {
 
       JwtConsumer jwtConsumer =
           new JwtConsumerBuilder()
-              .setSkipAllValidators()
               .setVerificationKeyResolver(resolver)
+              .setRequireExpirationTime()
               .setRelaxVerificationKeyValidation()
               .build();
       jwtConsumer.processToClaims(jwt);
